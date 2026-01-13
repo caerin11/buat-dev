@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>buat devon</title>
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    background: linear-gradient(135deg, #E4F8FF, #AEE5FF);
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Comic Sans MS', cursive;
+  }
+
+  /* BUNGA BACKGROUND */
+  .bg-flower {
+    position: absolute;
+    bottom: -50px;
+    font-size: 24px;
+    opacity: 0.6;
+    animation: rise linear infinite;
+    pointer-events: none;
+  }
+
+  @keyframes rise {
+    from {
+      transform: translateY(0);
+    }
+    to {
+      transform: translateY(-120vh);
+    }
+  }
+
+  /* TOMBOL */
+  .button {
+    background: #68A3AD;
+    color: white;
+    padding: 18px 32px;
+    border-radius: 40px;
+    font-size: 20px;
+    cursor: pointer;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    transition: transform 0.2s;
+    z-index: 2;
+  }
+
+  .button:active {
+    transform: scale(0.9);
+  }
+
+  /* BUNGA LEDAK */
+  .flower {
+    position: absolute;
+    font-size: 28px;
+    animation: pop 1.6s ease-out forwards;
+    pointer-events: none;
+  }
+
+  @keyframes pop {
+    0% { opacity: 1; transform: translateY(0) scale(1); }
+    100% { opacity: 0; transform: translateY(-120px) scale(1.4); }
+  }
+
+  /* KARTU GEMES */
+  .card {
+    position: absolute;
+    background: white;
+    padding: 40px;
+    border-radius: 30px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+    text-align: center;
+    animation: float 3s ease-in-out infinite;
+    display: none;
+    z-index: 2;
+  }
+
+  .face {
+    font-size: 80px;
+    animation: bounce 1.5s infinite;
+  }
+
+  .text {
+    margin-top: 15px;
+    font-size: 22px;
+    color: #77B6F1;
+  }
+
+  @keyframes bounce {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+  }
+
+  @keyframes float {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(10px); }
+  }
+</style>
+</head>
+<body>
+
+<div class="button" id="btn">here❗</div>
+
+<div class="card" id="card">
+  <div class="face">(⁠⁠╹⁠▽⁠╹⁠⁠)</div>
+  <div class="text">Hai devon</div>
+</div>
+
+<script>
+const bgFlowers = ["😎", "🤑", " 🥳", "🤗"];
+
+function createBgFlower() {
+  const f = document.createElement("div");
+  f.className = "bg-flower";
+  f.innerText = bgFlowers[Math.floor(Math.random()*bgFlowers.length)];
+  f.style.left = Math.random() * 100 + "vw";
+  f.style.animationDuration = (8 + Math.random()*6) + "s";
+  document.body.appendChild(f);
+
+  setTimeout(() => f.remove(), 14000);
+}
+setInterval(createBgFlower, 700);
+
+// TOMBOL KLIK
+const btn = document.getElementById("btn");
+const card = document.getElementById("card");
+
+btn.onclick = (e) => {
+  const flowers = ["🌸","🌼","🌷","🌺","💮"];
+
+  for (let i = 0; i < 14; i++) {
+    const f = document.createElement("div");
+    f.className = "flower";
+    f.innerText = flowers[Math.floor(Math.random()*flowers.length)];
+    f.style.left = (e.clientX + Math.random()*120 - 60) + "px";
+    f.style.top = (e.clientY + Math.random()*120 - 60) + "px";
+    document.body.appendChild(f);
+    setTimeout(() => f.remove(), 1600);
+  }
+
+  btn.style.display = "none";
+  setTimeout(() => card.style.display = "block", 800);
+};
+</script>
+
+</body>
+</html>
